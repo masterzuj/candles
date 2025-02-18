@@ -1,0 +1,76 @@
+
+<head>
+<script src="jquery-3.7.1.min.js" sourceMappingURL=”jquery-3.7.1.min.map”></script>
+ <style>
+body {
+  background-image: url('checkered_opacity.jpg');
+}
+</style> 
+<style>
+.cb{
+	width: 10px; 
+	background-color: lightblue;
+	height:100px;
+	bottom: 0px;
+	
+	position: relative;
+	float: left;
+	 
+}
+#candelcontainer{
+	width: 100%;
+	height: 100%;
+}
+.stick{
+	width: 10px;
+	height: 100%;
+	float: left;
+	margin-left: 10px;
+}
+.cw{
+	background-color: white;
+	width: 10px;
+	height: 100px;
+}
+</style>
+<script>
+	$( document ).ready(function() {
+	    console.log( "ready!" );
+	    
+		
+		var MoIn = 0;
+		var MoOut = 0;
+		
+		
+		
+	    var dh = $( document ).height();
+		var i = 0;
+		$( "#candelcontainer" ).on( "mousemove", function( event ) {
+		 
+		  i++; 
+		  
+		  var ddh = dh - event.pageY;
+		  var cch = $( "#candelcontainer" ).height();
+			
+			if(i == 1){MoIn = 100*ddh/cch;}
+			
+			console.log("In:" + MoIn + "Current:" + 100*ddh/cch + " Out:" + MoOut);
+			
+		  
+		  $( "#candelcontainer" ).append( "<div class='stick'><br clear='both'/><div class='cw' style='height:"+ event.pageY +"px;'></div><div class='cb' style='height:"+ ddh +"px;'></div></div>" );
+		if(i == 50){MoOut = 100*ddh/cch; $( "#calccontainer" ).append( Math.round(MoIn) + "% -> " + Math.round(MoOut) + "% <br/>" );  i = 0; $( "#candelcontainer" ).html("");}
+			
+		} );
+	});
+</script>
+</head>
+<body>
+<div id="candelcontainer">
+	
+</div>
+	
+<div id="calccontainer" style="position: fixed; top: 10px; left: 10px; color: green;"></div>	
+</body>
+
+
+</body>
